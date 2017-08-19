@@ -4,19 +4,11 @@ project("CUTEX"
   VERSION 1.0.1
   )
 
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 
-string(TOUPPER ${PROJECT_NAME} ${PROJECT_NAME}_UPPER)
-string(TOLOWER ${PROJECT_NAME} ${PROJECT_NAME}_LOWER)
-
-include("Base")
-include("Options")
-include("Dependencies")
-
-option(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS
-  "Build and run the ${PROJECT_NAME} unit tests."
-  ON
-)
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config/Base.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config/Options.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config/Dependencies.cmake")
 
 add_subdirectory("include")
 
