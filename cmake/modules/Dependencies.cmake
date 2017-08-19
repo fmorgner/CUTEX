@@ -3,15 +3,13 @@ include("ExternalDependency")
 set(${${PROJECT_NAME}_UPPER}_DEPS)
 
 if(${${PROJECT_NAME}_UPPER}_DEPS_VIA STREQUAL "conan")
-  if(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS)
-    include("ConanPackages")
-    install_conan_packages(SYSTEM_HEADERS
-      PKGOPTS ${CONAN_OPTIONS}
-      )
-    list(APPEND ${${PROJECT_NAME}_UPPER}_DEPS
-      CONAN_PKG::CUTE
-      )
-  endif()
+  include("ConanPackages")
+  install_conan_packages(SYSTEM_HEADERS
+    PKGOPTS ${CONAN_OPTIONS}
+    )
+  list(APPEND ${${PROJECT_NAME}_UPPER}_DEPS
+    CONAN_PKG::CUTE
+    )
 elseif(${${PROJECT_NAME}_UPPER}_DEPS_VIA STREQUAL "git")
   set(${${PROJECT_NAME}_UPPER}_DEPENDENCIES_DIR "${CMAKE_SOURCE_DIR}/external"
     CACHE PATH
@@ -19,13 +17,11 @@ elseif(${${PROJECT_NAME}_UPPER}_DEPS_VIA STREQUAL "git")
     FORCE
     )
 
-  if(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS)
-    external_dependency(
-      NAME "CUTE"
-      REPO "https://github.com/PeterSommerlad/CUTE"
-      INCLUDE_DIRECTORIES "${${${PROJECT_NAME}_UPPER}_DEPENDENCIES_DIR}/CUTE"
-      )
-  endif()
+  external_dependency(
+    NAME "CUTE"
+    REPO "https://github.com/PeterSommerlad/CUTE"
+    INCLUDE_DIRECTORIES "${${${PROJECT_NAME}_UPPER}_DEPENDENCIES_DIR}/CUTE"
+    )
 else()
   message(FATAL_ERROR "Unknown dependency resolution mechanism '${${${PROJECT_NAME}_UPPER}_DEPS_VIA}'")
 endif()
