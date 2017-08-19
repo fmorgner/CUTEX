@@ -1,7 +1,7 @@
-#include "cute/cute.h"
-#include "cute/cute_runner.h"
-#include "cute/ostream_listener.h"
-#include "cutex/descriptive_suite.h"
+#include <cute/cute.h>
+#include <cute/cute_runner.h>
+#include <cute/ostream_listener.h>
+#include <cutex/descriptive_suite.h>
 
 CUTE_DESCRIPTIVE_STRUCT(cutex_package_test)
   {

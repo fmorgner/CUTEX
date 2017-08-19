@@ -1,21 +1,20 @@
+# pylint: disable=missing-docstring
 import os
 from conans import ConanFile, CMake
 
 
-CHAN = os.getenv("CONAN_CHANNEL", "stable")
-USER = os.getenv("CONAN_USERNAME", "fmorgner")
-
-
 class CuteTestConan(ConanFile):
-    settings = "os", "compiler", "build_type", "arch"
-    requires = "CUTEX/1.0.0@%s/%s" % (USER, CHAN)
+    settings = (
+        'compiler',
+        'arch',
+    )
     generators = "cmake"
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_dir=self.conanfile_directory, build_dir="./")
+        cmake.configure(source_dir=self.conanfile_directory)
         cmake.build()
 
     def test(self):
         os.chdir("bin")
-        self.run(".%scutex" % os.sep)
+        self.run(".%spackage_test" % os.sep)
