@@ -26,19 +26,22 @@ macro(EXTERNAL_DEPENDENCY)
 
   if(DEP_CMAKE)
     add_subdirectory(${${${PROJECT_NAME}_UPPER}_DEPENDENCIES_DIR}/${DEP_NAME})
-    list(APPEND ${${PROJECT_NAME}_UPPER}_DEPS
-      ${DEP_LIBNAME}
-      )
   else()
-    include_directories(SYSTEM ${DEP_INCLUDE_DIRECTORIES})
     add_library(${DEP_LIBNAME} INTERFACE)
+    target_include_directories(${DEP_LIBNAME} SYSTEM INTERFACE
+      $<BUILD_INTERFACE:${DEP_INCLUDE_DIRECTORIES}>
+      )
     target_link_libraries(${DEP_LIBNAME} INTERFACE
       ${DEP_DEPENDENCIES}
       )
-    target_include_directories(${DEP_LIBNAME} SYSTEM INTERFACE
-      ${DEP_INCLUDE_DIRECTORIES}
+    install(TARGETS ${DEP_LIBNAME}
+      EXPORT ${PROJECT_NAME}
       )
   endif()
+
+  list(APPEND ${${PROJECT_NAME}_UPPER}_DEPS
+    ${DEP_LIBNAME}
+    )
 endmacro()
 
 set(${${PROJECT_NAME}_UPPER}_DEPS)
