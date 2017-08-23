@@ -12,7 +12,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config/Dependencies.cmake")
 
 add_subdirectory("include")
 
-if(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS AND NOT BUILD_DOCUMENTATION_ONLY)
+if(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS)
   include("CUTE")
   add_subdirectory(test)
 endif()
