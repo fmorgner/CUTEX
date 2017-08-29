@@ -36,7 +36,8 @@ class CUTEXConan(ConanFile):
             self.package_folder
         )
 
-        self.run(('cmake {directory}'
+        self.run(('mkdir build && cd build &&'
+                  'cmake {directory}'
                   ' -DEXTERNAL_DEPS_VIA=conan'
                   ' {prefix}'
                   ' {test}').format(**{
@@ -45,7 +46,7 @@ class CUTEXConan(ConanFile):
                       'test': cutex_test,
                   }))
 
-        self.run('cmake --build . --target install')
+        self.run('cd build && cmake --build . --target install')
 
     def package_info(self):
         self.cpp_info.includedirs = [
