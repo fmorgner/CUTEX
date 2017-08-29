@@ -16,9 +16,3 @@ if(${${PROJECT_NAME}_UPPER}_ENABLE_TESTS)
   include("CUTE")
   add_subdirectory(test)
 endif()
-
-install(EXPORT ${PROJECT_NAME}
-  DESTINATION "share/${PROJECT_NAME}/cmake"
-  )
-
-export(EXPORT ${PROJECT_NAME})
