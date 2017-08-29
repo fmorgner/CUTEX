@@ -37,7 +37,7 @@ class CUTEXConan(ConanFile):
         )
 
         self.run(('cmake {directory}'
-                  ' -DCUTEX_DEPS_VIA=conan'
+                  ' -DEXTERNAL_DEPS_VIA=conan'
                   ' {prefix}'
                   ' {test}').format(**{
                       'directory': self.conanfile_directory,
