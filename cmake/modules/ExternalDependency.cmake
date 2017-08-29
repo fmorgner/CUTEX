@@ -54,7 +54,7 @@ macro(EXTERNAL_DEPENDENCY)
     add_subdirectory(${CLONE_DIR}/${DEP_NAME})
   else()
     if(NOT DEP_LIBNAME)
-      set(DEP_LIBNAME ${NAME})
+      set(DEP_LIBNAME ${DEP_NAME})
     endif()
 
     if(NOT DEP_INCLUDE_DIRECTORIES)
